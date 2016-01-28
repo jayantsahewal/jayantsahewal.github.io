@@ -1,0 +1,39 @@
+---
+title: "EDA for RITA flight data 2006, 2007 and 2008"
+author: "Jayant Sahewal"
+date: "Jan 18, 2016"
+output: html_document
+---
+This data set contains information on United States airline flight delays and performance. The dataset includes all domestic flights from all carriers to/from major airports for 2006, 2007 and 2008.
+
+You may [download](http://stat-computing.org/dataexpo/2009/the-data.html) the data set from RITA.
+
+```{r, message=FALSE}
+library(dplyr)
+
+hour <- function(x) { 
+  return(substr(x, 0, nchar(x)-2)); 
+  }
+```
+
+```{r, message=FALSE}
+df <- read.csv('2006.csv')
+df["Time"] <- lapply(df["DepTime"], hour)
+df <- mutate(df, DateTime = paste(Year, Month, DayofMonth, Time, sep="-"))
+grouped <- group_by(df, DateTime)
+summed_2006 <- summarise(grouped,count=n(), DepDelay=mean(DepDelay, na.rm=TRUE))
+
+df <- read.csv('2007.csv')
+df["Time"] <- lapply(df["DepTime"], hour)
+df <- mutate(df, DateTime = paste(Year, Month, DayofMonth, Time, sep="-"))
+grouped <- group_by(df, DateTime)
+summed_2007 <- summarise(grouped,count=n(), DepDelay=mean(DepDelay, na.rm=TRUE))
+
+df <- read.csv('2008.csv')
+df["Time"] <- lapply(df["DepTime"], hour)
+df <- mutate(df, DateTime = paste(Year, Month, DayofMonth, Time, sep="-"))
+grouped <- group_by(df, DateTime)
+summed_2008 <- summarise(grouped,count=n(), DepDelay=mean(DepDelay, na.rm=TRUE))
+
+write.csv(rbind(summed_2006, summed_2007, summed_2008), "flights-datetime.csv")
+```

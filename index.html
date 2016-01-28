@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+</head>
+<body>
+
+  <!-- Title -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">
+          <b>Flight delays and Hour of the day</b>
+        </h1>
+        <p class="text-center lead">little tip: avoid booking flights between 11pm-3am</p>
+        <p class="lead">
+          Using <a href="http://stat-computing.org/dataexpo/2009/the-data.html">RITA  </a> 
+          (Research and Innovative Technology Administration) flight delay information for US domestic flights in 2006, 2007 and 2008 
+          the relationship between <b>average departure delay time</b> during different time periods can be explored.
+        </p>
+        <p class="lead">
+          The average flight delay between US domestic flights is <b>10 minutes</b>. But this simple average calculation depends upon
+          a number of factors. One of the factors is time period. This visualization explores the effects of different time periods 
+          on flight delays.
+        </p>
+
+        <p class="lead">
+          Let's have a look at average flight delays by year
+        </p>
+      </div>
+    </div>
+
+    <section class="fill">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="text-center">Average flight delays by year</h2>
+          <div id="AvgDelayByYearContainer"></div>
+          <p><small>*Note: Red dots indicate average delays of more than 10 minutes</small></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead">
+            We can see that between 2006, 2007 and 2008, the average flight delay has been around 10 or 11 minutes.
+            And, there is nothing much going on here.
+          </p>
+          <p class="lead">
+            Let's explore the next relationship... average flight delays by month
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <hr>
+    
+    <section>
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="text-center">Average flight delays by month</h2>
+          <div id="AvgDelayByMonthContainer"></div>
+          <p><small>*Note: Red dots indicate average delays of more than 10 minutes</small></p>
+        </div>
+      </div>      
+
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <p class="lead">
+            We can see that there are ups and downs in the flight delays by months. But, if we look closely then we
+            will see that difference between the worst month (december with <b>15 minutes</b>) and the best month (September with
+            <b>6 minutes</b>) is just <b>9 minutes</b>. Let's see if we can explore flight delay vs days of the month and find
+            anything <em>interesting</em> there.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <hr>
+
+    <section class="fill">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="text-center">Average flight delays by day of the month</h2>
+          <div id="AvgDelayByDateContainer"></div>
+          <p><small>*Note: Red dots indicate average delays of more than 10 minutes</small></p>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <p class="lead">
+            Here as well, we can see that there are ups and downs in the flight delays by day of the month. But, closer look will 
+            reveal that the difference between the worst day (22nd with <b>13 minutes</b>) and the best day (6th or 9th with
+            <b>9 minutes</b>) is just <b>4 minutes</b>. That's again is <em>not interesting</em>, right?
+          </p>
+          <p class="lead">
+            Let's explore just one more relationship to save the day... flight delays by hour of the day
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <hr>
+
+    <section class="fill">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="text-center">Average flight delays by hour of day</h2>
+          <div id="AvgDelayByHourContainer"></div>
+          <p><small>*Note: Red bars indicate delays of more than 45 minutes.</small></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <p class="lead">
+            Whoa!!! The difference between the best hour (5 am with <b>0 minutes</b>) and the worst hour (2 am with <b>114 minutes</b>)
+            is really huge compared to the differences by month or day.
+          </p>
+          <p class="lead">
+            Let's see if there is a relationship between number of flights and flight delays
+          </p>  
+        </div>
+      </div>
+
+    </section>
+
+    <hr>
+
+    <section class="fill">
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <h2 class="text-center">Number of flights by hour of day</h2>
+          <div id="hourNumberOfFlights"></div>
+          <p><small>*Note: Red bars indicate number of flights less than 50,000.</small></p>
+        </div>
+      </div>
+
+      <br>
+
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <p class="lead">
+            It looks interesting that in general hours with maximum number of flights have the lowest flight delays
+            i.e. there is inverse relationship between number of flights and flight delays
+          </p>
+          <p class="lead">
+            <em>So it seems like that  a clever one should avoid booking flights between 11 pm and 3 am
+              to minimize the probability of experiencing major delays.</em>
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+      <hr>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="colorbrewer.min.js"></script>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/dimple.v2.1.2.min.js"></script>
+
+    <script src="js/main.js"></script>
+
+  </body>
+  </html>
