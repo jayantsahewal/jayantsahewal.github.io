@@ -248,7 +248,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                    .selectAll("circle")
                    .attr("fill", function(d) {
                         if (d.height > 10) {
-                            return "#D53E4F";
+                            return "#d53e5c";
                           }
                         else {
                           return "#00949f";
@@ -284,7 +284,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                    .selectAll("circle")
                    .attr("fill", function(d) {
                         if (d.height > 10) {
-                            return "#D53E4F";
+                            return "#d53e5c";
                           }
                         else {
                           return "#00949f";
@@ -320,7 +320,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                    .selectAll("circle")
                    .attr("fill", function(d) {
                         if (d.height > 10) {
-                            return "#D53E4F";
+                            return "#d53e5c";
                           }
                         else {
                           return "#00949f";
@@ -356,7 +356,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                    .selectAll("circle")
                    .attr("fill", function(d) {
                         if (d.height > 10) {
-                            return "#D53E4F";
+                            return "#d53e5c";
                           }
                         else {
                           return "#00949f";
@@ -397,7 +397,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                    .selectAll("rect")
                    .attr("fill", function(d) {
                         if (d.height > 45) {
-                            return "#D53E4F";
+                            return "#d53e5c";
                           }
                         else {
                           return "#00949f";
@@ -432,7 +432,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
                   .selectAll("rect")
                   .attr("fill", function(d) {
                        if (d.height < 100000) {
-                           return "#D53E4F";
+                           return "#d53e5c";
                          }
                        else {
                          return "#00949f";
