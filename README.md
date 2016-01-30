@@ -4,7 +4,7 @@
 
 By looking at the [RITA US domestic flight delay dataset](http://stat-computing.org/dataexpo/2009/the-data.html) for 2006, 2007 and 2008, this visualization explores the relationship between **average flight departure delay** and different periods of time starting from different years till different hours of the day.
 
-Why don't you browse first the [visualization](http://jayantsahewal.github.io/make-effective-data-visualization/){:target="_blank"} first? And, then come back to read the whole story behind the visualization.
+Why don't you browse first the [visualization](http://jayantsahewal.github.io/make-effective-data-visualization/) first? And, then come back to read the whole story behind the visualization.
 
 ## Design Approach
 
