@@ -1,11 +1,10 @@
 /* This is css file for html file */
 
-/* this adds formatting for radio buttons */
-input[type="radio"] {
-	margin: 10px 15px;
-	vertical-align: middle;
-	display:inline;      
-};
+.btn{
+    background: #ccc;
+} .btn:focus{
+    background: olive;
+}
 
 /* this hides the elements with word hidden in their labels */
 .hidden {
