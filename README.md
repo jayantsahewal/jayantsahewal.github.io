@@ -17,7 +17,7 @@ After playing with data and different chart types I decided to go with line char
 ![First Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20Flight%20delay%20by%20hour%20-%20line%20chart.png)
 ![Second Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Number%20of%20flights%20by%20hour%20-%20line%20chart.png)
 
-I chose not to combine these two charts for a number of reasons. First, combining these two charts made the visualization more complex and second because these two were representing different scales of the data.
+I chose not to combine these two charts for a two reasons. First, combining these two charts made the visualization more complex and second because these two were representing different scales of the data.
 
 I believe that after going through the first 2 charts, a curious reader will certainly ask what about the other time periods? Is there a relationship? So, satisfy the curiosity of the readers and complete the story, I have included a section where users can toggle between different time periods to see the relationship between chosen time period and departure delay. These line charts show that there is only a couple of minutes difference between the time periods with worst and best delays. Since the flight delay data was in the range of 0 to 16 minutes, I added a visual cue to make the data points red which were greater than 10 minutes in these charts. I added a tooltip message to show the amount of minutes to help the viewer.
 

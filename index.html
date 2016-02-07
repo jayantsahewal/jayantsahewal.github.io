@@ -88,7 +88,7 @@
           </p>
           <p class="lead">
             What about other time periods? Let's quickly explore year, month, day of month and day of week using the
-            radio buttons below.
+            buttons below.
           </p>
         </div>
       </div>
@@ -100,16 +100,23 @@
     <section class="fill">
 
       <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-
+        <div class="col-sm-6 col-md-offset-3">
           <div id="actions">
             <div>
-              <input type="radio" name="chart" class="chart" id="year" value="AvgDelayByYearContainer" checked>by year
-              <input type="radio" name="chart" class="chart" id="month" value="AvgDelayByMonthContainer">by month
-              <input type="radio" name="chart" class="chart" id="dayOfMonth" value="AvgDelayByDateContainer">by day of month
-              <input type="radio" name="chart" class="chart" id="dayOfWeek" value="AvgDelayByDayContainer">by day of week
+              <button type="submit" class="btn btn-primary" name="chart" class="chart" id="year" value="AvgDelayByYearContainer" checked>by year</button>
+              <button type="submit" class="btn btn-primary" name="chart" class="chart" id="month" value="AvgDelayByMonthContainer">by month</button>
+              <button type="submit" class="btn btn-primary" name="chart" class="chart" id="dayOfMonth" value="AvgDelayByDateContainer">by day of month</button>
+              <button type="submit" class="btn btn-primary" name="chart" class="chart" id="dayOfWeek" value="AvgDelayByDayContainer">by day of week</button>
             </div>
           </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+
           <div id="charts">
             <h2 id="ChartTitle" class="text-center">Average flight delays by year</h2>
             <div id="AvgDelayByYearContainer" class="chart"></div>
