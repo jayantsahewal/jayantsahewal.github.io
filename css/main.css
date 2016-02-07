@@ -2,8 +2,10 @@
 
 .btn{
     background: #ccc;
-} .btn:focus{
-    background: olive;
+}
+
+#year {
+	background: #0044cc;
 }
 
 /* this hides the elements with word hidden in their labels */
