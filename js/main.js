@@ -456,6 +456,10 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   $(document).ready(function(){
     $("#year").click(function(){
       $("#ChartTitle").text('Average flight delays by year');
+      $("#year").css("background-color", "#0044cc");
+      $("#month").css("background-color", "#ccc");
+      $("#dayOfMonth").css("background-color", "#ccc");
+      $("#dayOfWeek").css("background-color", "#ccc");
       document.getElementById("AvgDelayByYearContainer").className = "Chart";
       document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
@@ -463,6 +467,10 @@ d3.csv("data/flights-datetime.csv", function(flights) {
     });
     $("#month").click(function(){
       $("#ChartTitle").text('Average flight delays by month');
+      $("#year").css("background-color", "#ccc");
+      $("#month").css("background-color", "#0044cc");
+      $("#dayOfMonth").css("background-color", "#ccc");
+      $("#dayOfWeek").css("background-color", "#ccc");
       document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByMonthContainer").className = "Chart";
       document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
@@ -470,6 +478,10 @@ d3.csv("data/flights-datetime.csv", function(flights) {
     });
     $("#dayOfMonth").click(function(){
       $("#ChartTitle").text('Average flight delays by day of month');
+      $("#year").css("background-color", "#ccc");
+      $("#month").css("background-color", "#ccc");
+      $("#dayOfMonth").css("background-color", "#0044cc");
+      $("#dayOfWeek").css("background-color", "#ccc");
       document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByDateContainer").className = "Chart";
@@ -477,6 +489,10 @@ d3.csv("data/flights-datetime.csv", function(flights) {
     });
     $("#dayOfWeek").click(function(){
       $("#ChartTitle").text('Average flight delays by day of week');
+      $("#year").css("background-color", "#ccc");
+      $("#month").css("background-color", "#ccc");
+      $("#dayOfMonth").css("background-color", "#ccc");
+      $("#dayOfWeek").css("background-color", "#0044cc");
       document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
       document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
