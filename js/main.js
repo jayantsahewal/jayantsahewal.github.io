@@ -1,7 +1,7 @@
 /*
 Charts for explanatory data analysis for Flights delay tends
 Author: Jayant Sahewal
-Date: 01/08/2016
+Date: 02/07/2016
 Built using d3.js and Dimple.js
 */
 
@@ -12,33 +12,33 @@ var svgLineYear = dimple.newSvg("#AvgDelayByYearContainer", 600, 400);
 
 var svgLineDate = dimple.newSvg("#AvgDelayByDateContainer", 800, 400);
 
-var svgHistDelay = dimple.newSvg("#AvgDelayByHourContainer", 600, 400);
+var svgLineHour = dimple.newSvg("#AvgDelayByHourContainer", 600, 400);
 
 var svgLineDay = dimple.newSvg("#AvgDelayByDayContainer", 600, 400);
 
-var svgHistCount = dimple.newSvg("#hourNumberOfFlights", 600, 400);
+var svgLineCount = dimple.newSvg("#hourNumberOfFlights", 600, 400);
 
 var monthMap = {1:"Jan", 2:"Feb", 3:"March", 4:"Apr",
-                5:"May", 6:"June", 7:"July", 8:"Ago",
-                9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"};
+5:"May", 6:"June", 7:"July", 8:"Ago",
+9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"};
 
 var weekMap = {1:"Sun", 2:"Mon", 3:"Tue",
-               4:"Wed", 5:"Thu", 6:"Fri",
-               7:"Sat"};
+4:"Wed", 5:"Thu", 6:"Fri",
+7:"Sat"};
 
 var monthArray = ["Jan", "Feb", "March", "Apr", "May", "June", "July",
-                  "Ago", "Sep", "Oct", "Nov", "Dec"];
+"Ago", "Sep", "Oct", "Nov", "Dec"];
 
 var weekArray = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 var yearArray = ['2006', '2007', '2008'];
 
 var dateArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-              '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
-              '24','25', '26', '27', '28', '29', '30', '31'];
+'13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23',
+'24','25', '26', '27', '28', '29', '30', '31'];
 
 var hours = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
-              '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+'13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
 // Read the CSV file and create charts
 d3.csv("data/flights-datetime.csv", function(flights) {
@@ -67,7 +67,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   // filter data for valid dates
   flights = flights.filter(function(d) {
     if(isNaN(d.Time)){
-        return false;
+      return false;
     }
     d.Time = parseInt(d.Time);
     return true;
@@ -76,21 +76,21 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /****************** group delay data by year starts ***********************/
 
   var flightsDelaysByYear = d3.nest()
-                          .key(function(d) { return d.Year; })
-                          .rollup(function(d) {
-                            return {
-                              Year: d3.mean(d, function(g) {
-                                  return g.Year;
-                                }),
-                              DepDelay: d3.sum(d, function(g) { 
-                                return g.DepDelayTotal; 
-                              }) / 
-                              d3.sum(d, function(g) { 
-                                return g.Count; 
-                              })
-                            }
-                          })
-                          .entries(flights);
+  .key(function(d) { return d.Year; })
+  .rollup(function(d) {
+    return {
+      Year: d3.mean(d, function(g) {
+        return g.Year;
+      }),
+      DepDelay: d3.sum(d, function(g) { 
+        return g.DepDelayTotal; 
+      }) / 
+      d3.sum(d, function(g) { 
+        return g.Count; 
+      })
+    }
+  })
+  .entries(flights);
 
 
   //returns a list of objects containing values
@@ -103,19 +103,19 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /****************** group delay data by month starts ********************/
 
   var flightsDelaysByMonth = d3.nest()
-                          .key(function(d) { return d.Month; })
-                          .rollup(function(d) {
-                            return {
-                              Month: d3.mean(d, function(g) {
-                                  return g.Month + 1;
-                                }),
-                              DepDelay: d3.sum(d, function(g) { 
-                                return g.DepDelayTotal; 
-                              }) / 
-                              d3.sum(d, function(g) { return g.Count; })
-                            }
-                          })
-                          .entries(flights);
+  .key(function(d) { return d.Month; })
+  .rollup(function(d) {
+    return {
+      Month: d3.mean(d, function(g) {
+        return g.Month + 1;
+      }),
+      DepDelay: d3.sum(d, function(g) { 
+        return g.DepDelayTotal; 
+      }) / 
+      d3.sum(d, function(g) { return g.Count; })
+    }
+  })
+  .entries(flights);
 
   //returns a list of objects containing values
   for (var i = 0; i < flightsDelaysByMonth.length; i++){
@@ -128,21 +128,21 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /*************** group delay data by day of month starts ******************/
   
   var flightsDelaysByDate = d3.nest()
-                          .key(function(d) { return d.DayOfMonth; })
-                          .rollup(function(d) {
-                            return {
-                              DayOfMonth: d3.mean(d, function(g) {
-                                  return g.DayOfMonth;
-                                }),
-                              DepDelay: d3.sum(d, function(g) { 
-                                return g.DepDelayTotal; 
-                              }) / 
-                              d3.sum(d, function(g) { 
-                                return g.Count; 
-                              })
-                            }
-                          })
-                          .entries(flights);
+  .key(function(d) { return d.DayOfMonth; })
+  .rollup(function(d) {
+    return {
+      DayOfMonth: d3.mean(d, function(g) {
+        return g.DayOfMonth;
+      }),
+      DepDelay: d3.sum(d, function(g) { 
+        return g.DepDelayTotal; 
+      }) / 
+      d3.sum(d, function(g) { 
+        return g.Count; 
+      })
+    }
+  })
+  .entries(flights);
 
   //returns a list of objects containing values
   for (var i = 0; i < flightsDelaysByDate.length; i++){
@@ -154,21 +154,21 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /****************** group delay data by day of week starts ***********************/
 
   var flightsDelaysByDay = d3.nest()
-                          .key(function(d) { return d.DayOfWeek; })
-                          .rollup(function(d) {
-                            return {
-                              DayOfWeek: d3.mean(d, function(g) {
-                                  return g.DayOfWeek+1;
-                                }),
-                              DepDelay: d3.sum(d, function(g) { 
-                                return g.DepDelayTotal; 
-                              }) / 
-                              d3.sum(d, function(g) { 
-                                return g.Count; 
-                              })
-                            }
-                          })
-                          .entries(flights);
+  .key(function(d) { return d.DayOfWeek; })
+  .rollup(function(d) {
+    return {
+      DayOfWeek: d3.mean(d, function(g) {
+        return g.DayOfWeek+1;
+      }),
+      DepDelay: d3.sum(d, function(g) { 
+        return g.DepDelayTotal; 
+      }) / 
+      d3.sum(d, function(g) { 
+        return g.Count; 
+      })
+    }
+  })
+  .entries(flights);
 
 
   //returns a list of objects containing values
@@ -182,21 +182,21 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /****************** group delay data by hour starts ***********************/
 
   var flightsDelaysByHour = d3.nest()
-                  .key(function(d) { return d.Time; })
-                  .rollup(function(d) {
-                            return {
-                              Time: d3.mean(d, function(g) {
-                                  return g.Time;
-                                }),
-                              DepDelay: d3.sum(d, function(g) { 
-                                return g.DepDelayTotal; 
-                              }) / 
-                              d3.sum(d, function(g) { 
-                                return g.Count; 
-                              })
-                            }
-                          })
-                  .entries(flights);
+  .key(function(d) { return d.Time; })
+  .rollup(function(d) {
+    return {
+      Time: d3.mean(d, function(g) {
+        return g.Time;
+      }),
+      DepDelay: d3.sum(d, function(g) { 
+        return g.DepDelayTotal; 
+      }) / 
+      d3.sum(d, function(g) { 
+        return g.Count; 
+      })
+    }
+  })
+  .entries(flights);
 
   //returns a list of objects containing values
   for (var i = 0; i < flightsDelaysByHour.length; i++){
@@ -208,18 +208,18 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   /****************** group flights count by hour starts *********************/
 
   var flightsCountsByHour = d3.nest()
-                  .key(function(d) { return d.Time; })
-                  .rollup(function(d) {
-                            return {
-                              Time: d3.mean(d, function(g) {
-                                  return g.Time;
-                                }),
-                              Count: d3.sum(d, function(g) { 
-                                return g.Count; 
-                              })
-                            }
-                          })
-                  .entries(flights);
+  .key(function(d) { return d.Time; })
+  .rollup(function(d) {
+    return {
+      Time: d3.mean(d, function(g) {
+        return g.Time;
+      }),
+      Count: d3.sum(d, function(g) { 
+        return g.Count; 
+      })
+    }
+  })
+  .entries(flights);
 
   //returns a list of objects containing values
   for (var i = 0; i < flightsCountsByHour.length; i++){
@@ -241,204 +241,248 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   lineChartYear.draw();
 
   lineX.titleShape.text("Year");
+  lineX.titleShape.attr("y", lineChartYear.height + 60);
   lineY.titleShape.text("Average departure delay time in minutes");
+  lineY.titleShape.attr("y", lineChartYear.height - 125);
 
   // Change colors of months with average delay time geater than 10 minutes
   var lineFocusYear = d3.select("#AvgDelayByYearContainer")
-                   .selectAll("circle")
-                   .attr("fill", function(d) {
-                        if (d.height > 10) {
-                            return "#d53e5c";
-                          }
-                        else {
-                          return "#00949f";
-                          }
-                     });
+  .selectAll("circle")
+  .attr("fill", function(d) {
+    if (d.height > 10) {
+      return "#d53e5c";
+    }
+    else {
+      return "#00949f";
+    }
+  });
 
   // Improve tooltip's content for line chart.
   dots.getTooltipText = function (e) {
-               return [
-                   "" + Math.round(e.y) + " min",
-               ];
-           };
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
 
-  /****************** chart for delay data by year ends ********************/
+ /****************** chart for delay data by year ends ********************/
 
-  /****************** chart for delay data by month starts ********************/
+ /****************** chart for delay data by month starts ********************/
 
-  var lineChartMonth = new dimple.chart(svgLineMonth, flightsDelaysByMonth);
-  lineChartMonth.setBounds(60, 30, 500, 300);
-  var lineX = lineChartMonth.addCategoryAxis("x", "MonthName");
-  lineX.addOrderRule(monthArray);
-  var lineY = lineChartMonth.addMeasureAxis("y", "DepDelay");
-  lineChartMonth.addSeries(null, dimple.plot.line);
-  var dots = lineChartMonth.addSeries(null, dimple.plot.scatter);
+ var lineChartMonth = new dimple.chart(svgLineMonth, flightsDelaysByMonth);
+ lineChartMonth.setBounds(60, 30, 500, 300);
+ var lineX = lineChartMonth.addCategoryAxis("x", "MonthName");
+ lineX.addOrderRule(monthArray);
+ var lineY = lineChartMonth.addMeasureAxis("y", "DepDelay");
+ lineChartMonth.addSeries(null, dimple.plot.line);
+ var dots = lineChartMonth.addSeries(null, dimple.plot.scatter);
 
-  lineChartMonth.draw();
+ lineChartMonth.draw();
 
-  lineX.titleShape.text("Month of Year");
-  lineY.titleShape.text("Average departure delay time in minutes");
+ lineX.titleShape.text("Month");
+ lineX.titleShape.attr("y", lineChartMonth.height + 60);
+ lineY.titleShape.text("Average departure delay time in minutes");
+ lineY.titleShape.attr("y", lineChartMonth.height - 125);
 
   // Change colors of months with average delay time geater than 10 minutes
   var lineFocusMonth = d3.select("#AvgDelayByMonthContainer")
-                   .selectAll("circle")
-                   .attr("fill", function(d) {
-                        if (d.height > 10) {
-                            return "#d53e5c";
-                          }
-                        else {
-                          return "#00949f";
-                          }
-                     });
+  .selectAll("circle")
+  .attr("fill", function(d) {
+    if (d.height > 10) {
+      return "#d53e5c";
+    }
+    else {
+      return "#00949f";
+    }
+  });
 
   // Improve tooltip's content for line chart.
   dots.getTooltipText = function (e) {
-               return [
-                   "" + Math.round(e.y) + " min",
-               ];
-           };
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
 
-  /****************** chart for delay data by month ends ********************/
+ /****************** chart for delay data by month ends ********************/
 
-  /****************** chart for delay data by date starts ********************/
+ /****************** chart for delay data by date starts ********************/
 
-  var lineChartDate = new dimple.chart(svgLineDate, flightsDelaysByDate);
-  lineChartDate.setBounds(60, 30, 700, 300);
-  var lineX = lineChartDate.addCategoryAxis("x", "DayOfMonth");
-  lineX.addOrderRule(dateArray);
-  var lineY = lineChartDate.addMeasureAxis("y", "DepDelay");
-  lineChartDate.addSeries(null, dimple.plot.line);
-  var dots = lineChartDate.addSeries(null, dimple.plot.scatter);
+ var lineChartDate = new dimple.chart(svgLineDate, flightsDelaysByDate);
+ lineChartDate.setBounds(60, 30, 700, 300);
+ var lineX = lineChartDate.addCategoryAxis("x", "DayOfMonth");
+ lineX.addOrderRule(dateArray);
+ var lineY = lineChartDate.addMeasureAxis("y", "DepDelay");
+ lineChartDate.addSeries(null, dimple.plot.line);
+ var dots = lineChartDate.addSeries(null, dimple.plot.scatter);
 
-  lineChartDate.draw();
+ lineChartDate.draw();
 
-  lineX.titleShape.text("Date of Month");
-  lineY.titleShape.text("Average departure delay time in minutes");
+ lineX.titleShape.text("Date of Month");
+ lineX.titleShape.attr("y", lineChartDate.height + 60);
+ lineY.titleShape.text("Average departure delay time in minutes");
+ lineY.titleShape.attr("y", lineChartDate.height - 125);
 
   // Change colors of months with average delay time geater than 10 minutes
   var lineFocusDate = d3.select("#AvgDelayByDateContainer")
-                   .selectAll("circle")
-                   .attr("fill", function(d) {
-                        if (d.height > 10) {
-                            return "#d53e5c";
-                          }
-                        else {
-                          return "#00949f";
-                          }
-                     });
+  .selectAll("circle")
+  .attr("fill", function(d) {
+    if (d.height > 10) {
+      return "#d53e5c";
+    }
+    else {
+      return "#00949f";
+    }
+  });
 
   // Improve tooltip's content
   dots.getTooltipText = function (e) {
-               return [
-                   "" + Math.round(e.y) + " min",
-               ];
-            };
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
 
-  /****************** chart for delay data by date ends ********************/
+ /****************** chart for delay data by date ends ********************/
 
-  /****************** chart for delay data by day of week starts ********************/
+ /****************** chart for delay data by day of week starts ********************/
 
-  var lineChartDay = new dimple.chart(svgLineDay, flightsDelaysByDay);
-  lineChartDay.setBounds(60, 30, 500, 300);
-  var lineX = lineChartDay.addCategoryAxis("x", "Weekday");
-  lineX.addOrderRule(weekArray);
-  var lineY = lineChartDay.addMeasureAxis("y", "DepDelay");
-  lineChartDay.addSeries(null, dimple.plot.line);
-  var dots = lineChartDay.addSeries(null, dimple.plot.scatter);
+ var lineChartDay = new dimple.chart(svgLineDay, flightsDelaysByDay);
+ lineChartDay.setBounds(60, 30, 500, 300);
+ var lineX = lineChartDay.addCategoryAxis("x", "Weekday");
+ lineX.addOrderRule(weekArray);
+ var lineY = lineChartDay.addMeasureAxis("y", "DepDelay");
+ lineChartDay.addSeries(null, dimple.plot.line);
+ var dots = lineChartDay.addSeries(null, dimple.plot.scatter);
 
-  lineChartDay.draw();
+ lineChartDay.draw();
 
-  lineX.titleShape.text("Day of Week");
-  lineY.titleShape.text("Average departure delay time in minutes");
+ lineX.titleShape.text("Day of Week");
+ lineX.titleShape.attr("y", lineChartDay.height + 60);
+ lineY.titleShape.text("Average departure delay time in minutes");
+ lineY.titleShape.attr("y", lineChartDay.height - 125);
 
   // Change colors of months with average delay time geater than 10 minutes
   var lineFocusDay = d3.select("#AvgDelayByDayContainer")
-                   .selectAll("circle")
-                   .attr("fill", function(d) {
-                        if (d.height > 10) {
-                            return "#d53e5c";
-                          }
-                        else {
-                          return "#00949f";
-                          }
-                     });
+  .selectAll("circle")
+  .attr("fill", function(d) {
+    if (d.height > 10) {
+      return "#d53e5c";
+    }
+    else {
+      return "#00949f";
+    }
+  });
 
   // Improve tooltip's content for line chart.
   dots.getTooltipText = function (e) {
-               return [
-                   "" + Math.round(e.y) + " min",
-               ];
-           };
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
 
-  /****************** chart for delay data by day of week ends ********************/
+ /****************** chart for delay data by day of week ends ********************/
 
-  /****************** chart for delay data by hour starts ********************/
+ /****************** chart for delay data by hour starts ********************/
 
-  var barDelay = new dimple.chart(svgHistDelay, flightsDelaysByHour);
-  barDelay.setBounds(60, 30, 500, 300);
-  var xDelay = barDelay.addCategoryAxis("x", "Time");
-  xDelay.addOrderRule("Time");
-  var yDelay = barDelay.addMeasureAxis("y", "DepDelay");
-  var sDelay = barDelay.addSeries(null, dimple.plot.bar);
-  sDelay.aggregate = dimple.aggregateMethod.avg;
-  barDelay.draw();
+ var lineChartHour = new dimple.chart(svgLineHour, flightsDelaysByHour);
+ lineChartHour.setBounds(60, 30, 500, 300);
+ var xDelay = lineChartHour.addCategoryAxis("x", "Time");
+ xDelay.addOrderRule("Time");
+ var yDelay = lineChartHour.addMeasureAxis("y", "DepDelay");
+ lineChartHour.addSeries(null, dimple.plot.line);
+ var dots = lineChartHour.addSeries(null, dimple.plot.scatter);
 
-  xDelay.titleShape.text("By hour of day (24-hour clock)");
-  yDelay.titleShape.text("Average departure delay time in minutes");
+ lineChartHour.draw();
 
-  sDelay.getTooltipText = function (e) {
-                return [
-                    "" + Math.round(e.y) + " min",
-                ];
-            };
+ xDelay.titleShape.text("By hour of day (24-hour clock)");
+ yDelay.titleShape.text("Average departure delay time in minutes");
 
   // Change colors of months with average delay time geater than 45 minutes
-  var barFocusDelay = d3.select("#AvgDelayByHourContainer")
-                   .selectAll("rect")
-                   .attr("fill", function(d) {
-                        if (d.height > 45) {
-                            return "#d53e5c";
-                          }
-                        else {
-                          return "#00949f";
-                          }
-                     });
+  var lineFocusHour = d3.select("#AvgDelayByHourContainer")
+  .selectAll("circle")
+  .attr("fill", function(d) {
+    if (d.height > 45) {
+      return "#d53e5c";
+    }
+    else {
+      return "#00949f";
+    }
+  });
 
-  /****************** chart for delay data by hour ends ********************/
+  // Improve tooltip's content for line chart.
+  dots.getTooltipText = function (e) {
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
 
-  /***************** chart for flight counts by hour starts *******************/
+ /****************** chart for delay data by hour ends ********************/
 
-  var barCount = new dimple.chart(svgHistCount, flightsCountsByHour);
-  barCount.setBounds(60, 30, 500, 300);
-  var xCount = barCount.addCategoryAxis("x", "Time");
-  xCount.addOrderRule("Time");
-  var yCount = barCount.addMeasureAxis("y", "Count");
-  var sCount = barCount.addSeries(null, dimple.plot.bar);
-  sCount.aggregate = dimple.aggregateMethod.avg;
+ /***************** chart for flight counts by hour starts *******************/
 
-  barCount.draw();
+ var lineCount = new dimple.chart(svgLineCount, flightsCountsByHour);
+ lineCount.setBounds(60, 30, 500, 300);
+ var xCount = lineCount.addCategoryAxis("x", "Time");
+ xCount.addOrderRule("Time");
+ var yCount = lineCount.addMeasureAxis("y", "Count");
+ lineCount.addSeries(null, dimple.plot.line);
+ var dots = lineCount.addSeries(null, dimple.plot.scatter);
 
-  xCount.titleShape.text("By hour of day (24-hour clock)");
-  yCount.titleShape.text("Volume of flights");
+ lineCount.draw();
 
-  sCount.getTooltipText = function (e) {
-               return [
-                   "" + Math.round(e.y) + " flights",
-               ];
-           };
+ xCount.titleShape.text("By hour of day (24-hour clock)");
+ yCount.titleShape.text("Volume of flights");
 
-  // Change colors of months with flights counts less than 50,000
-  var barFocusCount = d3.select("#hourNumberOfFlights")
-                  .selectAll("rect")
-                  .attr("fill", function(d) {
-                       if (d.height < 100000) {
-                           return "#d53e5c";
-                         }
-                       else {
-                         return "#00949f";
-                         }
-                    });
+ // Change colors of months with flights counts less than 50,000
+ var lineFocusCount = d3.select("#hourNumberOfFlights")
+ .selectAll("circle")
+ .attr("fill", function(d) {
+   if (d.height < 100000) {
+     return "#d53e5c";
+   }
+   else {
+     return "#00949f";
+   }
+ });
 
-  /***************** chart for flight counts by hour ends *******************/
+  // Improve tooltip's content for line chart.
+  dots.getTooltipText = function (e) {
+   return [
+   "" + Math.round(e.y) + " min",
+   ];
+ };
+
+ /***************** chart for flight counts by hour ends *******************/
+
+  // jquery function for toggling between charts for different timeframes
+  $(document).ready(function(){
+    $("#year").click(function(){
+      $("#ChartTitle").text('Average flight delays by year');
+      document.getElementById("AvgDelayByYearContainer").className = "Chart";
+      document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDayContainer").className = "Chart hidden";
+    });
+    $("#month").click(function(){
+      $("#ChartTitle").text('Average flight delays by month');
+      document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByMonthContainer").className = "Chart";
+      document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDayContainer").className = "Chart hidden";
+    });
+    $("#dayOfMonth").click(function(){
+      $("#ChartTitle").text('Average flight delays by day of month');
+      document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDateContainer").className = "Chart";
+      document.getElementById("AvgDelayByDayContainer").className = "Chart hidden";
+    });
+    $("#dayOfWeek").click(function(){
+      $("#ChartTitle").text('Average flight delays by day of week');
+      document.getElementById("AvgDelayByYearContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByMonthContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDateContainer").className = "Chart hidden";
+      document.getElementById("AvgDelayByDayContainer").className = "Chart";
+    });
+  });
+
 
 });
