@@ -2,7 +2,7 @@
 
 ## Summary
 
-By looking at the [RITA US domestic flight delay dataset](http://stat-computing.org/dataexpo/2009/the-data.html) for 2006, 2007 and 2008, this visualization explores the relationship between **average flight departure delay** and different periods of time starting from different years till different hours of the day.
+By looking at the [RITA US domestic flight delay dataset](http://stat-computing.org/dataexpo/2009/the-data.html) for 2006, 2007 and 2008, this visualization explores the relationship between **average flight departure delay** and **the hour of day**. You can also explore the relationship between departure delay and different periods of time such as years, months, day of the month and day of the week.
 
 Why don't you browse first the [visualization](http://jayantsahewal.github.io/make-effective-data-visualization/) first? And, then come back to read the whole story behind the visualization.
 
@@ -12,15 +12,16 @@ Why don't you browse first the [visualization](http://jayantsahewal.github.io/ma
 After downloading and unzipping the dataset from RITA for 2006, 2007, 2008, I realized that these files were huge (around 2 GB) and had a lot of information which I didn't need for my visualization. So, I used EDA.Rmd file to process and summarize the data after keeping the necessary information and save it in a new file flights-datetime.csv.
 
 ### Line Charts
-After playing with data and different chart types I decided to go with line charts as first 4 charts in the visualization where x axis is time period (year, month of year, date of month and day of week) and y axis is average departure delay in minutes. I chose the line charts becuase these visualizations are related to time series data and line charts are amongst the best to visualize time series data. These line charts show that there is only a couple of minutes difference between the time periods with worst and best delays. Since the flight delay data was in the range of 0 to 16 minutes, I added a visual cue to make the data points red which were greater than 10 minutes in these charts. I added a tooltip message to show the amount of minutes to help the viewer.
+After playing with data and different chart types I decided to go with line charts as the main plot for its simplicity and effectiveness in communicating the message loud and clear. The first line chart explores flight delays by hour of the day which showcases the main idea behind the visualization i.e. avoid booking flights between 11pm-3am. In this chart I added a visual cue to make the data points red which were having flight delays of more than 45 minutes. I chose to explore number of flights by hour of the day as the second bar chart because it visualizes the fact that despite lowest number of flight between 11pm and 3 am, they have the worst flight delays. In this chart I added a visual cue to make the data points red which were having number of flights less than 100,000.
+
+first 4 charts in the visualization where x axis is time period (year, month of year, date of month and day of week) and y axis is average departure delay in minutes. I chose the line charts becuase these visualizations are related to time series data and line charts are amongst the best to visualize time series data. These line charts show that there is only a couple of minutes difference between the time periods with worst and best delays. Since the flight delay data was in the range of 0 to 16 minutes, I added a visual cue to make the data points red which were greater than 10 minutes in these charts. I added a tooltip message to show the amount of minutes to help the viewer.
 
 ![First Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20flight%20delays%20by%20year.png)
 ![Second Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20flight%20delays%20by%20month.png)
 ![Third Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20flight%20delays%20by%20day%20of%20the%20month.png)
 ![Fourth Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20flight%20delays%20by%20day%20of%20the%20week.png)
 
-### Bar Charts
-I chose the bar chart as the main plot for its simplicity and effectiveness in communicating the message loud and clear. The first bar chart explores flight delays by hour of the day which showcases the main idea behind the visualization i.e. avoid booking flights between 11pm-3am. In this chart I added a visual cue to make the bars red which were having flight delays of more than 45 minutes. I chose to explore number of flights by hour of the day as the second bar chart because it visualizes the fact that despite lowest number of flight between 11pm and 3 am, they have the worst flight delays. In this chart I added a visual cue to make the bars red which were having number of flights less than 100,000.
+I chose the bar chart as the main plot for its simplicity and effectiveness in communicating the message loud and clear. 
 
 ![Fifth Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Average%20flight%20delays%20by%20hour%20of%20day.png)
 ![Sixth Chart](https://raw.githubusercontent.com/jayantsahewal/make-effective-data-visualization/master/img/Number%20of%20flights%20by%20hour%20of%20day.png)
