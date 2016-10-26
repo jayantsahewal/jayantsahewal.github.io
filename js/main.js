@@ -446,7 +446,7 @@ d3.csv("data/flights-datetime.csv", function(flights) {
   // Improve tooltip's content for line chart.
   dots.getTooltipText = function (e) {
    return [
-   "" + Math.round(e.y) + " min",
+   "" + Math.round(e.y),
    ];
  };
 
