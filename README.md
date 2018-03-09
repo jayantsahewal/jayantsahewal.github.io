@@ -4,7 +4,7 @@
 
 By looking at the [RITA US domestic flight delay dataset](http://stat-computing.org/dataexpo/2009/the-data.html) for 2006, 2007 and 2008, this visualization explores the relationship between **average flight departure delay** and **the hour of day**. You can also explore the relationship between departure delay and different periods of time such as years, months, day of the month and day of the week.
 
-Why don't you browse the [visualization](http://jayantsahewal.github.io/make-effective-data-visualization/) first? And, then come back to read the whole story behind the visualization.
+Why don't you browse the [visualization](https://jayantsahewal.github.io/make-effective-data-visualization/) first? And, then come back to read the whole story behind the visualization.
 
 ## Design Approach
 
